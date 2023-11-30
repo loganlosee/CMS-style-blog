@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Your CMS Blog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{pageTitle}}</title>
+  <!-- Add your CSS and other head elements here -->
 </head>
 <body>
-  {{{body}}}
+  {{> header}} <!-- Include header partial -->
+
+  {{{body}}}   <!-- Render the main content of each view -->
+
+  {{> footer}} <!-- Include footer partial -->
+  <!-- Add your scripts and other body elements here -->
 </body>
 </html>

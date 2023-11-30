@@ -1,4 +1,3 @@
-// models/index.js
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -23,9 +22,9 @@ const db = {};
 fs.readdirSync(__dirname)
   .filter(file => file !== 'index.js') // Exclude the index.js file
   .forEach(file => {
-    const model = require(path.join(__dirname, file));
-    const modelInstance = model(sequelize, Sequelize.DataTypes);
-    db[modelInstance.name] = modelInstance;
+    const modelDefiner = require(path.join(__dirname, file));
+    const model = modelDefiner(sequelize, Sequelize.DataTypes);
+    db[model.name] = model;
   });
 
 // Configure associations, if needed
