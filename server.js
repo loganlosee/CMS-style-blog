@@ -5,6 +5,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
 const { sequelize } = require('./models');
+const { User } = require('./models');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -35,8 +36,8 @@ app.set('view engine', 'handlebars');
 app.use('/api/auth', require('./controllers/authController'));
 app.use('/api/blog', require('./controllers/blogController'));
 
-// Start the server
 sequelize.sync().then(() => {
+  // Set up your routes and start the server
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
