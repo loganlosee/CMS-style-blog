@@ -23,8 +23,9 @@ const db = {};
 fs.readdirSync(__dirname)
   .filter(file => file !== 'index.js') // Exclude the index.js file
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
-    db[model.name] = model;
+    const model = require(path.join(__dirname, file));
+    const modelInstance = model(sequelize, Sequelize.DataTypes);
+    db[modelInstance.name] = modelInstance;
   });
 
 // Configure associations, if needed

@@ -1,43 +1,52 @@
-// server.js
 const express = require('express');
 const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
-const { sequelize } = require('./models');
-const { User } = require('./models');
+const { sequelize } = require('./models'); 
+const authController = require('./controllers/authController');
+const blogController = require('./controllers/blogController');
+const commentController = require('./controllers/commentController');
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Load environment variables from .env file
-dotenv.config();
-
-// Middleware for parsing JSON requests
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Session setup
+// Set up session
+const sessionStore = new SequelizeStore({
+  db: sequelize,
+});
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || 'secret',
+    secret: 'your-secret-key', // Change this to a secure secret
     resave: false,
-    saveUninitialized: false,
-    store: new SequelizeStore({
-      db: sequelize,
-    }),
+    saveUninitialized: true,
+    store: sessionStore,
   })
 );
 
-// Set up Handlebars as the view engine
-app.engine('handlebars', exphbs());
+// Set up Handlebars
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// Define your routes using controllers
-app.use('/api/auth', require('./controllers/authController'));
-app.use('/api/blog', require('./controllers/blogController'));
+// Routes
+app.use('/api/auth', authController);
+app.use('/api/blog', blogController);
+app.use('/api/comments', commentController);
 
+// Error middleware
+app.use((req, res, next) => {
+  res.status(404).send("Sorry, can't find that!");
+});
+
+// Start Sequelize and sync models with the database
 sequelize.sync().then(() => {
-  // Set up your routes and start the server
+  // Start the server
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
