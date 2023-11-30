@@ -31,8 +31,9 @@ app.use(
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-app.use('/api/auth', require('./routes/authRoutes'));
-app.use('/api/blog', require('./routes/blogRoutes'));
+// Define your routes using controllers
+app.use('/api/auth', require('./controllers/authController'));
+app.use('/api/blog', require('./controllers/blogController'));
 
 // Start the server
 sequelize.sync().then(() => {
