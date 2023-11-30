@@ -7,6 +7,7 @@ const { sequelize } = require('./models');
 const authController = require('./controllers/authController');
 const blogController = require('./controllers/blogController');
 const commentController = require('./controllers/commentController');
+const handlebars = require('handlebars');
 
 dotenv.config();
 
@@ -30,14 +31,37 @@ app.use(
   })
 );
 
+handlebars.registerHelper('extend', function (name, context) {
+  const block = handlebars.registeredBlocks[name];
+  return block ? block(context) : null;
+});
+
 // Set up Handlebars
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.engine(
+  'handlebars',
+  exphbs({
+    defaultLayout: 'main',
+    helpers: {
+      // Include your custom helpers here
+      extend: function (name, context) {
+        // Custom implementation of extend helper
+        // ...
+      },
+      // Other custom helpers
+    },
+  })
+);
 app.set('view engine', 'handlebars');
 
 // Routes
 app.use('/api/auth', authController);
 app.use('/api/blog', blogController);
 app.use('/api/comments', commentController);
+
+app.get('/', (req, res) => {
+  // Render the home.handlebars template
+  res.render('home', { pageTitle: 'Home Page' });
+});
 
 // Error middleware
 app.use((req, res, next) => {

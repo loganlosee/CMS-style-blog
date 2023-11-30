@@ -7,11 +7,23 @@
   <!-- Add your CSS and other head elements here -->
 </head>
 <body>
-  {{> header}} <!-- Include header partial -->
+  <header>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/api/blog">Blog</a></li>
+        <!-- Add more navigation links as needed -->
+      </ul>
+    </nav>
+  </header>
 
-  {{{body}}}   <!-- Render the main content of each view -->
+  <main>
+    {{{body}}} <!-- Render the main content of each view -->
+  </main>
 
-  {{> footer}} <!-- Include footer partial -->
+  <footer>
+    <p>&copy; 2023 Your Blog Name. All rights reserved.</p>
+  </footer>
   <!-- Add your scripts and other body elements here -->
 </body>
 </html>

@@ -1,8 +1,7 @@
 const { DataTypes } = require('sequelize');
 
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize) => {
   const User = sequelize.define('User', {
-    // define your model fields here
     username: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  // define any associations or additional configurations here
+  // Define associations or additional configurations here
 
   return User;
 };

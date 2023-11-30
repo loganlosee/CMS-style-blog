@@ -1,0 +1,13 @@
+<!-- blog/index.handlebars -->
+{{#extend "layouts/main"}}
+  {{#content "body"}}
+    <h1>Blog Posts</h1>
+    {{#each posts}}
+      <div>
+        <h2>{{title}}</h2>
+        <p>{{content}}</p>
+        <!-- Add more post details here -->
+      </div>
+    {{/each}}
+  {{/content}}
+{{/extend}}
