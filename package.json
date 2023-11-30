@@ -1,7 +1,7 @@
 {
-  "name": "user-list",
+  "name": "CMS-style-blog",
   "version": "1.0.0",
-  "description": "",
+  "description": "A CMS-style blog site",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
