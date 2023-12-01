@@ -1,12 +1,21 @@
-// controllers/blogController.js
 const express = require('express');
 const router = express.Router();
 
-// Example blog routes
-router.get('/posts', (req, res) => {
-  res.render('blog/posts'); // Render the blog/posts.handlebars view
+// Import BlogPost model 
+const { BlogPost } = require('../models');
+
+// Route for fetching all blog posts
+router.get('/posts', async (req, res) => {
+  try {
+    // Implement logic to fetch all blog posts
+    const posts = await BlogPost.findAll();
+    res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
-// Other blog routes...
+// Other blog-related routes (create, update, delete) can be added here
 
 module.exports = router;

@@ -4,10 +4,8 @@ require('dotenv').config();
 let sequelize;
 
 if (process.env.JAWSDB_URL) {
-  // If using JawsDB in production
   sequelize = new Sequelize(process.env.JAWSDB_URL);
 } else {
-  // If using a local MySQL database
   sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER,

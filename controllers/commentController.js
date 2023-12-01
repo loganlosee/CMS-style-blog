@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Import Comment model (assuming it's in models/comment.js)
+// Import Comment model 
 const { Comment } = require('../models');
 
 // Route for adding a comment to a blog post

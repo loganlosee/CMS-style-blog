@@ -42,25 +42,31 @@ app.engine(
   exphbs({
     defaultLayout: 'main',
     helpers: {
-      // Include your custom helpers here
+      // custom helpers here
       extend: function (name, context) {
         // Custom implementation of extend helper
-        // ...
+        // ?
       },
-      // Other custom helpers
     },
   })
 );
 app.set('view engine', 'handlebars');
 
 // Routes
-app.use('/api/auth', authController);
-app.use('/api/blog', blogController);
-app.use('/api/comments', commentController);
+app.use(routes);
 
 app.get('/', (req, res) => {
   // Render the home.handlebars template
   res.render('home', { pageTitle: 'Home Page' });
+});
+
+app.get('/api/blog', (req, res) => {
+  res.render('blog', { pageTitle: 'Blog Page' });
+});
+
+app.get('/api/auth/logout', (req, res) => {
+  // Handle logout logic and redirect or render a page
+  // ...
 });
 
 // Error middleware

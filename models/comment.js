@@ -6,13 +6,6 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    // Add any other fields you need for a comment
-
-    // Example: userId for associating comments with users
-    // userId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
   });
 
   // Define associations or additional configurations here

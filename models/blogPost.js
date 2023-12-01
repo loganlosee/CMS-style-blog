@@ -10,13 +10,6 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    // Add any other fields you need for a blog post
-
-    // Example: userId for associating blog posts with users
-    // userId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    // },
   });
 
   // Define associations or additional configurations here

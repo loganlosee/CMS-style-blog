@@ -4,26 +4,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{pageTitle}}</title>
-  <!-- Add your CSS and other head elements here -->
+  <!-- Add CSS here -->
 </head>
 <body>
-  <header>
-    <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/api/blog">Blog</a></li>
-        <!-- Add more navigation links as needed -->
-      </ul>
-    </nav>
-  </header>
-
+  {{> header}} 
   <main>
-    {{{body}}} <!-- Render the main content of each view -->
+    {{{body}}} 
   </main>
 
   <footer>
     <p>&copy; 2023 Your Blog Name. All rights reserved.</p>
   </footer>
-  <!-- Add your scripts and other body elements here -->
+  
+  <script>
+    function confirmLogout() {
+      const isConfirmed = confirm("Are you sure you want to logout?");
+      if (isConfirmed) {
+        window.location.href = "/api/auth/logout"; // Redirect to the logout route
+      }
+    }
+  </script>
 </body>
 </html>
+
