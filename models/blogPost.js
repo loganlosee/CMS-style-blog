@@ -1,7 +1,16 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-module.exports = (sequelize) => {
-  const BlogPost = sequelize.define('BlogPost', {
+class Post extends Model {}
+
+Post.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -10,19 +19,20 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-  });
+    user_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+  },
+  {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "post",
+  }
+);
 
-  // Define associations or additional configurations here
-  BlogPost.associate = (models) => {
-    BlogPost.belongsTo(models.User, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE',
-    });
-    BlogPost.hasMany(models.Comment, {
-      foreignKey: 'blogPostId',
-      onDelete: 'CASCADE',
-    });
-  };
-
-  return BlogPost;
-};
+module.exports = Post;

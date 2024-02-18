@@ -1,24 +1,43 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require("sequelize");
+const sequelize = require("../config/connection");
 
-module.exports = (sequelize) => {
-  const Comment = sequelize.define('Comment', {
-    text: {
-      type: DataTypes.TEXT,
-      allowNull: false,
+class Comment extends Model {}
+
+Comment.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
     },
-  });
-
-  // Define associations or additional configurations here
-  Comment.associate = (models) => {
-    Comment.belongsTo(models.User, {
-      foreignKey: 'userId',
-      onDelete: 'CASCADE',
-    });
-    Comment.belongsTo(models.BlogPost, {
-      foreignKey: 'blogPostId',
-      onDelete: 'CASCADE',
-    });
-  };
-
-  return Comment;
-};
+    comment_text: {
+      type: DataTypes.STRING,
+      validate: {
+        len: [3],
+      },
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "user",
+        key: "id",
+      },
+    },
+    post_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "post",
+        key: "id",
+      },
+    },
+  },
+  {
+    sequelize,
+    freezeTableName: true,
+    underscored: true,
+    modelName: "comment",
+  }
+);
+module.exports = Comment;
