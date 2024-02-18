@@ -4,9 +4,7 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
 const { sequelize } = require('./models'); 
-const authController = require('./controllers/authController');
-const blogController = require('./controllers/blogController');
-const commentController = require('./controllers/commentController');
+const routes = require('./controllers');
 const handlebars = require('handlebars');
 
 dotenv.config();
