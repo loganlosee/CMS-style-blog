@@ -1,29 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{{pageTitle}}</title>
-  <!-- Add CSS here -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech-Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sail&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <body>
-  {{> header}} 
-  <main>
-    {{{body}}} 
-  </main>
+    <div class="wrapper">
+        <header class="hero">
+            <h1 class="app-title">Tech-Blog</h1>
+            <nav class="nav">
+                <a class="link nav-link" href="/">Home</a>
+                <a class="link nav-link" href="/dashboard">Dashboard</a>
+                {{#if loggedIn}}
+                <a class="link nav-link" href="/" id="logout">Logout</a>
+                {{else}}
+                <a class="link nav-link" href="/login">Login</a>
+                {{/if}}
+            </nav>
+        </header>
 
-  <footer>
-    <p>&copy; 2023 Your Blog Name. All rights reserved.</p>
-  </footer>
-  
-  <script>
-    function confirmLogout() {
-      const isConfirmed = confirm("Are you sure you want to logout?");
-      if (isConfirmed) {
-        window.location.href = "/api/auth/logout"; // Redirect to the logout route
-      }
-    }
-  </script>
+        <main>
+            {{{body}}}
+        </main>
+    </div>
+
+    {{#if loggedIn}}
+    <script src="/javascript/logout.js"></script>
+    {{/if}}
 </body>
 </html>
-
