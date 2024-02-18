@@ -1,13 +1,12 @@
-const express = require('express');
-const session = require('express-session');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const dotenv = require('dotenv');
-const exphbs = require('express-handlebars');
-const { sequelize } = require('./models'); 
-const routes = require('./controllers');
-const handlebars = require('handlebars');
-
-dotenv.config();
+const path = require("path");
+const routes = require("./controllers");
+const sequelize = require("./config/connection");
+const express = require("express");
+const session = require("express-session");
+const handleBars = require("express-handlebars");
+const hbs = handleBars.create();
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,60 +16,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Set up session
-const sessionStore = new SequelizeStore({
-  db: sequelize,
-});
-app.use(
-  session({
-    secret: 'your-secret-key', // Change this to a secure secret
-    resave: false,
-    saveUninitialized: true,
-    store: sessionStore,
-  })
-);
-
-handlebars.registerHelper('extend', function (name, context) {
-  const block = handlebars.registeredBlocks[name];
-  return block ? block(context) : null;
+const myStore = new SequelizeStore({
+  db: sequelize, 
 });
 
-// Set up Handlebars
-app.engine(
-  'handlebars',
-  exphbs({
-    defaultLayout: 'main',
-    helpers: {
-      // custom helpers here
-      extend: function (name, context) {
-        // Custom implementation of extend helper
-        // ?
-      },
-    },
-  })
-);
-app.set('view engine', 'handlebars');
+app.use(session({
+  secret: 'secret',
+  store: myStore,
+  resave: false,
+  saveUninitialized: false,
+}));
 
-// Routes
-app.use(routes);
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/', (req, res) => {
-  // Render the home.handlebars template
-  res.render('home', { pageTitle: 'Home Page' });
-});
+app.engine("handlebars", hbs.engine);
 
-app.get('/api/blog', (req, res) => {
-  res.render('blog', { pageTitle: 'Blog Page' });
-});
-
-app.get('/api/auth/logout', (req, res) => {
-  // Handle logout logic and redirect or render a page
-  // ...
-});
-
-// Error middleware
-app.use((req, res, next) => {
-  res.status(404).send("Sorry, can't find that!");
-});
+app.set("view engine", "handlebars");
 
 // Start Sequelize and sync models with the database
 sequelize.sync().then(() => {
