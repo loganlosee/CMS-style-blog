@@ -68,6 +68,7 @@ router.get("/edit/:id", authenticationMiddleware, (req, res) => {
       res.status(500).json(err);
     });
 });
+
 router.get("/new", (req, res) => {
   res.render("new-post");
 });
