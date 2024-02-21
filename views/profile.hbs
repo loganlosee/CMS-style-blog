@@ -12,18 +12,16 @@
             </h2>
             <p class="float-right">
                 Posted on {{post.date_created}}
-
                 <button class="primary ml-2 mt-1 edit-button" data-post-id="{{post.id}}">Edit</button>
                 <button class="delete ml-2 mt-1 delete-button" data-id="{{post.id}}">Delete</button>
             </p>
         </div>
         <div class="col-md-12">
-            <p>
-                {{post.content}}
-            </p>
+            <p>{{post.content}}</p>
         </div>
     </div>
     {{/each}}
+
     <button id="new-button" class="primary">New Post</button>
 
     <div id="createPostModal" class="modal">
@@ -54,3 +52,4 @@
 </div>
 
 <script src="../public/js/profile.js"></script>
+{{/content}}
