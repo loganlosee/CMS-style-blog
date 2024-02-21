@@ -4,6 +4,8 @@ Welcome to my CMS-style blog! This platform allows users to create, edit, and de
 
 ## Features
 
+[![screenshot](/public/images/Screenshot%202024-02-20%20at%209.38.26 PM.png)]
+
 - **User Authentication**: Sign up, log in, and log out securely to manage posts and comments.
 - **Create, Edit, Delete Posts**: Easily manage blog content.
 - **Commenting System**: Engage with your audience through comments.
