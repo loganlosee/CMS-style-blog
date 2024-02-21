@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User, Comment, Post } = require('../../models');
+const { User, Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // Route to create a new post if the user is logged in
