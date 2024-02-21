@@ -1,39 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech-Blog</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sail&display=swap" rel="stylesheet">
-</head>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>A Tech Blog</title>
+        <link rel="stylesheet" href="../../public/css/styles.css" />
+    </head>
 
-<body>
-    <header>
-          <nav class="nav">
-            <a class="link nav-link" href="/">Home</a>
-            <a class="link nav-link" href="/dashboard">Dashboard</a>
-            {{#if loggedIn}}
-              <a class="link nav-link" href="/" id="logout">Logout</a>
-            {{else}}
-              <a class="link nav-link" href="/login">Login</a>
-            {{/if}}
-          </nav>
-    </header>
-    
-    <div class="wrapper">
-        <main>
-            {{{body}}} 
-        </main>
-    </div>
+    <body class="secondary">
+        <header>
+            <div class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+                <h1 class="mx-auto">A Tech Blog</h1>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">Dashboard</a>
+                    </li>
+                </ul>
+                {{#if logged_in}}
+                <button class="btn btn-primary" id="logout">Logout</button>
+                {{else}}
+                <a class="btn btn-primary" href="/login">Login</a>
+                {{/if}}
+            </div>
+        </header>
+        <main class="container secondary">{{{ body }}}</main>
 
-    <footer>
-        <p>&copy; 2024 Tech-Blog. All rights reserved.</p>
-    </footer>
-
-      {{#if loggedIn}}
-         <script src="/javascript/logout.js"></script>
-      {{/if}}
-</body>
+        {{#if logged_in}}
+        <script src="../../public/js/logout.js"></script>
+        {{/if}}
+    </body>
+</html>
 

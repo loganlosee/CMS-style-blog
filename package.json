@@ -1,5 +1,5 @@
 {
-  "name": "CMS-style-blog",
+  "name": "CMS_style_blog",
   "version": "1.0.0",
   "description": "A CMS-style blog site",
   "main": "server.js",
@@ -18,7 +18,7 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.3.5",
     "express-session": "^1.17.1",
-    "mysql2": "^2.3.3",
-    "sequelize": "^6.35.1"
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.5"
   }
 }
