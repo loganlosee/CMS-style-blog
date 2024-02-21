@@ -1,13 +1,13 @@
 {
-  "name": "cms-styl-blog",
+  "name": "cms-style-blog",
   "version": "1.0.0",
   "description": "A simple blog application",
   "main": "app.js",
   "scripts": {
       "start": "node server.js",
-      "seed": "node seeds/seed.js"
+      "seed": "node seeds/seeds.js"
   },
-  "author": "Kwinn-Korth",
+  "author": "logan-losee",
   "license": "MIT",
   "dependencies": {
       "bcrypt": "^5.0.0",
